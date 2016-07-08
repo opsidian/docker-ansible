@@ -30,6 +30,11 @@ describe "Dockerfile" do
     it { should be_installed.by('pip') }
   end
 
+  describe file('/etc/ansible/ansible.cfg') do
+    it { should be_file }
+    it { should be_readable.by_user('app') }
+  end
+
   after(:all) do
     if !@container.nil?
       @container.delete(:force => true)

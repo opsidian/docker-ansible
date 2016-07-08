@@ -18,6 +18,7 @@ RUN \
         ansible==$ANSIBLE_VERSION \
         docker-py \
         boto \
+    && mkdir -p /etc/ansible \
 
     && echo "Create project directory" \
     && mkdir -p /var/project \
@@ -30,6 +31,7 @@ RUN \
 
 COPY opsidian-release /etc/opsidian-release
 COPY init.sh /usr/local/bin/docker-init
+COPY ansible.cfg /etc/ansible/ansible.cfg
 
 WORKDIR /var/project
 

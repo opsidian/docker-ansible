@@ -20,8 +20,12 @@ describe "Dockerfile" do
     set :docker_container, @container.id
   end
 
-  describe file('/etc/ansible/roles/debops.secret') do
+  describe file('/var/project/roles-3rd/debops.secret') do
     it { should be_directory }
+  end
+
+  describe command('ansible-playbook -i inventory test.yml') do
+    its(:stdout) { should match '"msg": "ansible-playbook test"' }
   end
 
   after(:all) do
