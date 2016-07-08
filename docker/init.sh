@@ -14,6 +14,7 @@ fi
 
 if [ -f /var/project/ansible-ssh-private-key ]; then
     eval `ssh-agent`
+    echo -e "#!/usr/bin/env bash\nexport SSH_AGENT_PID=$SSH_AGENT_PID\nexport SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > /etc/profile.d/ssh_agent.sh
     ssh-add /var/project/ansible-ssh-private-key
 fi
 
