@@ -30,6 +30,14 @@ describe "Dockerfile" do
     its(:user) { should eq "root" }
   end
 
+  describe command('bash -l -c \'echo $SSH_AGENT_PID\'') do
+    its(:stdout) { should match '\d+' }
+  end
+
+  describe command('bash -l -c \'echo $SSH_AUTH_SOCK\'') do
+    its(:stdout) { should match '/tmp/ssh-.*/agent\.\d+' }
+  end
+
   describe file('/var/project/ansible-vault-key') do
     it { should be_file }
     it { should be_mode 400 }
