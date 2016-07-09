@@ -25,11 +25,6 @@ describe "Dockerfile" do
     its(:content) { should eq File.read('spec/rsc/test-ssh-private-key') }
   end
 
-  describe process('ssh-agent') do
-    it { should be_running }
-    its(:user) { should eq "root" }
-  end
-
   after(:all) do
     if !@container.nil?
       @container.delete(:force => true)

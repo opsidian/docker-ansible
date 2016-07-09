@@ -27,7 +27,7 @@ describe "Dockerfile" do
 
   describe process('ssh-agent') do
     it { should be_running }
-    its(:user) { should eq "root" }
+    its(:user) { should eq "app" }
   end
 
   describe command('bash -l -c \'echo $SSH_AGENT_PID\'') do

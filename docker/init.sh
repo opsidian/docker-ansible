@@ -13,9 +13,9 @@ if [ -n "$ANSIBLE_SSH_PRIVATE_KEY" ]; then
 fi
 
 if [ -f /var/project/ansible-ssh-private-key ]; then
-    eval `ssh-agent`
+    eval `su-exec $USER ssh-agent`
+    su-exec $USER ssh-add /var/project/ansible-ssh-private-key
     echo -e "#!/usr/bin/env bash\nexport SSH_AGENT_PID=$SSH_AGENT_PID\nexport SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > /etc/profile.d/ssh_agent.sh
-    ssh-add /var/project/ansible-ssh-private-key
 fi
 
 if [ -n "$ANSIBLE_VAULT_KEY" ]; then
